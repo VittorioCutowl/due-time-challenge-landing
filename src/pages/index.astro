@@ -1,0 +1,231 @@
+---
+import "../styles/global.css";
+
+const leaderboardUrl = "https://splendid-longma-5b2da5.netlify.app/";
+const cutowlUrl = "https://www.cutowl.com/";
+const participateUrl = "#download";
+
+const steps = [
+  {
+    number: "1",
+    title: "Scarica Due Time",
+    text: "Accedi all'app e preparati alla gara."
+  },
+  {
+    number: "2",
+    title: "Gioca e fai punti",
+    text: "Salva il gregge, supera i livelli e migliora il tuo score."
+  },
+  {
+    number: "3",
+    title: "Entra nella top 3",
+    text: "A fine evento, i migliori punteggi vincono i premi."
+  }
+];
+
+const leaderboard = [
+  { rank: "1", name: "Player name", score: "12.840" },
+  { rank: "2", name: "Player name", score: "11.520" },
+  { rank: "3", name: "Player name", score: "10.910" }
+];
+
+const prizes = [
+  { rank: "2", label: "Secondo posto", prize: "Premio esclusivo", className: "second" },
+  { rank: "1", label: "Primo posto", prize: "Premio speciale", className: "first" },
+  { rank: "3", label: "Terzo posto", prize: "Premio a sorpresa", className: "third" }
+];
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Partecipa alla Due Time Challenge: gioca a Dui Saves the Flock, scala la classifica e prova a vincere uno dei premi sponsorizzati da Cutowl."
+    />
+    <meta property="og:title" content="Due Time Challenge" />
+    <meta
+      property="og:description"
+      content="Gioca, fai punti e scala la classifica Due Time. Concorso sponsorizzato da Cutowl."
+    />
+    <meta property="og:type" content="website" />
+    <title>Due Time Challenge | Cutowl</title>
+    <link rel="icon" type="image/png" href="/assets/due-time/logo-duetime.png" />
+  </head>
+  <body>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="cloud cloud-left" src="/assets/due-time/cloud-left.png" alt="" aria-hidden="true" />
+        <img class="cloud cloud-right" src="/assets/due-time/cloud-right.png" alt="" aria-hidden="true" />
+
+        <header class="site-header" aria-label="Intestazione">
+          <a class="brand" href="/" aria-label="Due Time Challenge">
+            <img src="/assets/due-time/logo-duetime.png" alt="" width="58" height="58" />
+            <span>
+              <strong>Due Time</strong>
+              <small>Challenge</small>
+            </span>
+          </a>
+
+          <div class="header-actions">
+            <a class="leaderboard-link" href={leaderboardUrl}>Classifica</a>
+            <a class="sponsor-pill" href={cutowlUrl} aria-label="Concorso sponsorizzato da Cutowl">
+              <span>Sponsorizzato da</span>
+              <img src="/assets/cutowl/logo-cutowl.svg" alt="Cutowl" width="98" />
+            </a>
+          </div>
+        </header>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Evento live</p>
+            <h1 id="hero-title">Scala la classifica Due Time</h1>
+            <p class="subtitle">
+              Gioca a <strong>Dui Saves the Flock</strong>, fai più punti che puoi e prova a vincere uno dei
+              premi messi in palio da Cutowl.
+            </p>
+            <div class="actions" aria-label="Azioni principali">
+              <a class="btn btn-primary" href={participateUrl}>Partecipa alla gara</a>
+              <a class="btn btn-secondary" href={leaderboardUrl}>Guarda la classifica</a>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Anteprima gara Due Time">
+            <img class="phone phone-main" src="/assets/due-time/mockup-hero.png" alt="Schermata dell'app Due Time" />
+            <img class="mascot" src="/assets/due-time/owl-hero-big.png" alt="" aria-hidden="true" />
+
+            <div class="qr-card" id="download">
+              <div class="qr-placeholder" aria-label="QR code da sostituire con quello definitivo">
+                <span>QR</span>
+              </div>
+              <p>Inquadra il QR, scarica Due Time e inizia la sfida.</p>
+            </div>
+
+            <div class="score-card">
+              <span>Score da battere</span>
+              <strong>12.840</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-steps" aria-labelledby="steps-title">
+        <div class="section-inner">
+          <div class="section-head">
+            <p class="section-kicker">Come funziona</p>
+            <h2 id="steps-title">Tre passaggi, poi conta solo il punteggio.</h2>
+          </div>
+
+          <div class="steps-grid">
+            {
+              steps.map((step) => (
+                <article class="step-card">
+                  <span class="step-number">{step.number}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-prizes" aria-labelledby="prizes-title">
+        <div class="section-inner">
+          <div class="section-head section-head-invert">
+            <p class="section-kicker">Premi</p>
+            <h2 id="prizes-title">I primi 3 vincono</h2>
+            <p>La classifica premia i giocatori con il punteggio più alto. Punta al podio.</p>
+          </div>
+
+          <div class="prize-podium" aria-label="Podio premi">
+            {
+              prizes.map((prize) => (
+                <article class={`prize-card ${prize.className}`}>
+                  <span class="prize-rank">{prize.rank}</span>
+                  <div>
+                    <h3>{prize.label}</h3>
+                    <p>{prize.prize}</p>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-leaderboard" aria-labelledby="leaderboard-title">
+        <div class="section-inner">
+          <div class="section-head">
+            <p class="section-kicker">Classifica live</p>
+            <h2 id="leaderboard-title">La top 3 cambia fino alla fine.</h2>
+          </div>
+
+          <div class="leaderboard-panel">
+            <div class="leaderboard-rows" aria-label="Anteprima classifica">
+              {
+                leaderboard.map((player) => (
+                  <div class="leaderboard-row">
+                    <span class="rank">{player.rank}</span>
+                    <strong>{player.name}</strong>
+                    <span class="score">{player.score}</span>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="leaderboard-copy">
+              <h3>Controlla posizione, punti e livelli raggiunti.</h3>
+              <p>
+                La classifica completa resta il riferimento per capire chi sta guidando la sfida e chi può ancora
+                entrare nel podio.
+              </p>
+              <a class="btn btn-primary" href={leaderboardUrl}>Apri classifica live</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-sponsor" aria-labelledby="sponsor-title">
+        <div class="section-inner">
+          <div class="sponsor-block">
+            <div class="cutowl-panel">
+              <img src="/assets/cutowl/logo-cutowl-white.svg" alt="Cutowl" width="280" />
+            </div>
+            <div>
+              <p class="section-kicker">Sponsor</p>
+              <h2 id="sponsor-title">Concorso sponsorizzato da Cutowl</h2>
+              <p>Un'esperienza firmata Cutowl per scoprire Due Time giocando.</p>
+              <a class="btn btn-secondary" href={cutowlUrl}>Scopri Cutowl</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section final-section" aria-labelledby="final-title">
+        <div class="section-inner">
+          <div class="final-cta">
+            <div>
+              <p class="section-kicker">Ultima chiamata</p>
+              <h2 id="final-title">Hai ancora tempo per scalare la classifica</h2>
+              <p>Inquadra il QR, entra nella gara e prova a conquistare il podio.</p>
+              <a class="btn btn-primary" href={participateUrl}>Partecipa alla gara</a>
+            </div>
+            <div class="qr-placeholder qr-final" aria-label="QR code da sostituire con quello definitivo">
+              <span>QR</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <strong>Due Time Challenge</strong>
+        <span>Concorso sponsorizzato da Cutowl</span>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -12,10 +12,37 @@ Il progetto contiene:
 - wireframe HTML approvato;
 - anteprima HTML con asset reali;
 - asset Due Time e Cutowl in `public/assets/`.
+- prima versione Astro in `src/`.
 
-Il prossimo step e trasformare la preview approvata in una landing Astro pronta per deploy su Cloudflare.
+Il prossimo step e la review visiva della versione Astro e la sostituzione dei placeholder con link, QR e premi definitivi.
 
-## Preview locali
+## Sviluppo Astro
+
+Installazione:
+
+```bash
+npm install
+```
+
+Dev server:
+
+```bash
+npm run dev
+```
+
+Build:
+
+```bash
+npm run build
+```
+
+Preview build:
+
+```bash
+npm run preview
+```
+
+## Preview documentali
 
 Con un server statico dalla root del progetto:
 
