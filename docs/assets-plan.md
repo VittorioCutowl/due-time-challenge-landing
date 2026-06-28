@@ -56,9 +56,14 @@ Prima selezione asset scaricata e salvata in `public/assets/`.
   - Icona freccia.
   - Uso previsto: link esterni/CTA.
 
+## Asset concorso
+
+- `public/assets/qr-due-time.png`
+  - QR code definitivo fornito da Vittorio.
+  - Uso previsto: card QR in hero e CTA finale.
+
 ## Mancanze da confermare
 
-- QR definitivo per installare/partecpare.
 - Link definitivo TestFlight/app.
 - Link definitivo classifica.
 - Premi reali.

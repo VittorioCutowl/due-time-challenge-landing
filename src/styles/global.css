@@ -291,19 +291,15 @@ h3 {
   border-radius: 24px;
 }
 
-.qr-placeholder {
-  display: grid;
+.qr-code {
+  display: block;
   width: 100%;
   aspect-ratio: 1;
-  place-items: center;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background:
-    linear-gradient(90deg, #111 10px, transparent 10px) 0 0 / 28px 28px,
-    linear-gradient(#111 10px, transparent 10px) 0 0 / 28px 28px,
-    var(--white);
-  color: rgba(255, 255, 255, 0.84);
-  font-weight: 900;
+  background: var(--white);
+  object-fit: contain;
+  padding: 10px;
 }
 
 .qr-card p {

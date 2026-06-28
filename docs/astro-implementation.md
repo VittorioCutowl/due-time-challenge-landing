@@ -38,9 +38,12 @@ URL usato in locale:
 http://127.0.0.1:4322/
 ```
 
+## Asset definitivi inseriti
+
+- QR code definitivo: `public/assets/qr-due-time.png`
+
 ## Placeholder ancora presenti
 
-- QR code definitivo.
 - Link definitivo per installazione/partecipa.
 - Premi reali.
 - Nomi e punteggi reali nella preview classifica.
