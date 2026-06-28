@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Asset Preview - Due Time Challenge</title>
+    <style>
+      :root {
+        --ink: #181717;
+        --muted: #635f5c;
+        --cutowl: #e8433f;
+        --sky: #dbf5ff;
+        --grass: #a8d766;
+        --gold: #f4bd3f;
+        --paper: #fffaf2;
+        --line: rgba(24, 23, 23, 0.14);
+        --shadow: 0 24px 70px rgba(24, 23, 23, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 92vh;
+        padding: 24px clamp(18px, 4vw, 64px) 64px;
+        overflow: hidden;
+        background: linear-gradient(180deg, var(--sky) 0%, #effbff 62%, #d8eca5 62%, var(--grass) 100%);
+      }
+
+      .cloud {
+        position: absolute;
+        pointer-events: none;
+        opacity: 0.82;
+      }
+
+      .cloud.left {
+        top: 88px;
+        left: -90px;
+        width: 260px;
+      }
+
+      .cloud.right {
+        top: 58px;
+        right: -180px;
+        width: 520px;
+      }
+
+      .header {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        max-width: 1180px;
+        margin: 0 auto 52px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand img {
+        width: 58px;
+        height: 58px;
+      }
+
+      .brand strong {
+        display: block;
+        font-size: 18px;
+        line-height: 1.1;
+      }
+
+      .brand span,
+      .sponsor-kicker {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .sponsor-pill {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 250, 242, 0.78);
+        backdrop-filter: blur(14px);
+      }
+
+      .sponsor-pill img {
+        width: 98px;
+        height: auto;
+      }
+
+      .hero-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(360px, 0.88fr);
+        align-items: center;
+        gap: clamp(34px, 6vw, 88px);
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 18px;
+        padding: 8px 12px;
+        border: 1px solid rgba(232, 67, 63, 0.28);
+        border-radius: 999px;
+        background: rgba(255, 250, 242, 0.8);
+        color: var(--cutowl);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 99px;
+        background: currentColor;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin: 0;
+        font-size: clamp(54px, 8vw, 106px);
+        line-height: 0.9;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 630px;
+        margin: 24px 0 0;
+        color: #383432;
+        font-size: clamp(19px, 2vw, 27px);
+        line-height: 1.28;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 54px;
+        padding: 0 22px;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        font-weight: 900;
+        box-shadow: 4px 4px 0 var(--ink);
+      }
+
+      .btn.primary {
+        background: var(--cutowl);
+        color: white;
+      }
+
+      .btn.secondary {
+        background: white;
+      }
+
+      .visual {
+        position: relative;
+        min-height: 570px;
+      }
+
+      .mockup {
+        position: absolute;
+        right: 12px;
+        top: -16px;
+        width: min(56%, 292px);
+        filter: drop-shadow(0 30px 38px rgba(24, 23, 23, 0.25));
+      }
+
+      .mascot {
+        position: absolute;
+        right: 188px;
+        bottom: 24px;
+        width: min(48%, 250px);
+        filter: drop-shadow(0 18px 24px rgba(24, 23, 23, 0.18));
+      }
+
+      .qr-card,
+      .score-card {
+        position: absolute;
+        border: 2px solid var(--ink);
+        background: var(--paper);
+        box-shadow: 8px 8px 0 var(--ink);
+      }
+
+      .qr-card {
+        top: 88px;
+        left: 0;
+        width: 228px;
+        padding: 16px;
+        border-radius: 24px;
+      }
+
+      .qr {
+        display: grid;
+        width: 100%;
+        aspect-ratio: 1;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background:
+          linear-gradient(90deg, #111 10px, transparent 10px) 0 0 / 28px 28px,
+          linear-gradient(#111 10px, transparent 10px) 0 0 / 28px 28px,
+          white;
+        color: rgba(255, 255, 255, 0.84);
+        font-weight: 900;
+      }
+
+      .qr-card p {
+        margin: 12px 2px 0;
+        color: #383432;
+        font-size: 14px;
+        line-height: 1.25;
+      }
+
+      .score-card {
+        right: 68px;
+        bottom: 76px;
+        width: 280px;
+        padding: 22px;
+        border-radius: 22px;
+        background: white;
+      }
+
+      .score-card span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .score-card strong {
+        display: block;
+        margin-top: 6px;
+        font-size: 44px;
+        line-height: 1;
+      }
+
+      .section {
+        padding: 86px clamp(18px, 4vw, 64px);
+      }
+
+      .section.dark {
+        background: var(--ink);
+        color: white;
+      }
+
+      .inner {
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        margin: 0 0 28px;
+        font-size: clamp(36px, 5vw, 66px);
+        line-height: 0.98;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .step,
+      .leaderboard,
+      .sponsor-block,
+      .final-cta {
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: white;
+        box-shadow: var(--shadow);
+      }
+
+      .step {
+        padding: 28px;
+      }
+
+      .step-num {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 99px;
+        background: var(--cutowl);
+        color: white;
+        font-weight: 900;
+      }
+
+      .step h3 {
+        margin: 28px 0 10px;
+        font-size: 24px;
+      }
+
+      .step p,
+      .sponsor-block p,
+      .final-cta p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .prizes {
+        display: grid;
+        grid-template-columns: 0.8fr 1fr 0.8fr;
+        align-items: end;
+        gap: 18px;
+        min-height: 390px;
+      }
+
+      .prize {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 250px;
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 28px 28px 0 0;
+        background: #252322;
+      }
+
+      .prize.first {
+        min-height: 340px;
+        background: linear-gradient(180deg, var(--gold) 0%, #29221a 100%);
+      }
+
+      .prize.second {
+        min-height: 292px;
+      }
+
+      .prize h3 {
+        margin: 0;
+        font-size: 54px;
+      }
+
+      .prize p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .leaderboard {
+        display: grid;
+        grid-template-columns: 1fr 0.75fr;
+        gap: 24px;
+        padding: 28px;
+      }
+
+      .rows {
+        display: grid;
+        gap: 12px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 48px 1fr auto;
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+        border-radius: 16px;
+        background: #f5f1e9;
+      }
+
+      .rank {
+        display: grid;
+        width: 36px;
+        height: 36px;
+        place-items: center;
+        border-radius: 99px;
+        background: var(--ink);
+        color: white;
+        font-weight: 900;
+      }
+
+      .score {
+        font-weight: 900;
+      }
+
+      .sponsor-block {
+        display: grid;
+        grid-template-columns: 0.82fr 1fr;
+        gap: 36px;
+        align-items: center;
+        padding: 36px;
+      }
+
+      .cutowl-panel {
+        display: grid;
+        min-height: 250px;
+        place-items: center;
+        border-radius: 24px;
+        background: var(--ink);
+      }
+
+      .cutowl-panel img {
+        width: min(70%, 280px);
+      }
+
+      .final-cta {
+        display: grid;
+        grid-template-columns: 1fr 220px;
+        gap: 24px;
+        align-items: center;
+        padding: 32px;
+        background: linear-gradient(135deg, #fffaf2 0%, #d9f4ff 100%);
+      }
+
+      .footer {
+        padding: 32px clamp(18px, 4vw, 64px);
+        background: var(--ink);
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .footer .inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      @media (max-width: 880px) {
+        .hero {
+          min-height: auto;
+          padding-bottom: 42px;
+        }
+
+        .header,
+        .footer .inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .hero-grid,
+        .leaderboard,
+        .sponsor-block,
+        .final-cta {
+          grid-template-columns: 1fr;
+        }
+
+        .visual {
+          min-height: 560px;
+        }
+
+        .mockup {
+          right: 0;
+          width: 58%;
+        }
+
+        .mascot {
+          right: 130px;
+          width: 46%;
+        }
+
+        .qr-card {
+          top: 54px;
+          width: 210px;
+        }
+
+        .score-card {
+          right: 18px;
+          bottom: 58px;
+        }
+
+        .steps,
+        .prizes {
+          grid-template-columns: 1fr;
+        }
+
+        .prizes {
+          min-height: auto;
+        }
+
+        .prize,
+        .prize.first,
+        .prize.second {
+          min-height: 180px;
+          border-radius: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <img class="cloud left" src="../public/assets/due-time/cloud-left.png" alt="" />
+        <img class="cloud right" src="../public/assets/due-time/cloud-right.png" alt="" />
+
+        <header class="header">
+          <a class="brand" href="#">
+            <img src="../public/assets/due-time/logo-duetime.png" alt="Due Time" />
+            <div>
+              <strong>Due Time</strong>
+              <span>Challenge</span>
+            </div>
+          </a>
+          <a class="sponsor-pill" href="https://www.cutowl.com/">
+            <span class="sponsor-kicker">Sponsorizzato da</span>
+            <img src="../public/assets/cutowl/logo-cutowl.svg" alt="Cutowl" />
+          </a>
+        </header>
+
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Evento live</div>
+            <h1>Scala la classifica Due Time</h1>
+            <p class="subtitle">
+              Gioca a Dui Saves the Flock, fai più punti che puoi e prova a vincere uno dei premi messi in palio da Cutowl.
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="#cta">Partecipa alla gara</a>
+              <a class="btn secondary" href="#classifica">Guarda la classifica</a>
+            </div>
+          </div>
+
+          <div class="visual">
+            <img class="mockup" src="../public/assets/due-time/mockup-hero.png" alt="Mockup app Due Time" />
+            <img class="mascot" src="../public/assets/due-time/owl-hero-big.png" alt="" />
+            <div class="qr-card">
+              <div class="qr">QR</div>
+              <p>Inquadra il QR, scarica Due Time e inizia la sfida.</p>
+            </div>
+            <div class="score-card">
+              <span>Score da battere</span>
+              <strong>12.840</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="inner">
+          <h2 class="section-title">Come funziona</h2>
+          <div class="steps">
+            <article class="step">
+              <div class="step-num">1</div>
+              <h3>Scarica Due Time</h3>
+              <p>Accedi all'app e preparati alla gara.</p>
+            </article>
+            <article class="step">
+              <div class="step-num">2</div>
+              <h3>Gioca e fai punti</h3>
+              <p>Salva il gregge, supera i livelli e migliora il tuo score.</p>
+            </article>
+            <article class="step">
+              <div class="step-num">3</div>
+              <h3>Entra nella top 3</h3>
+              <p>A fine evento, i migliori punteggi vincono i premi.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dark">
+        <div class="inner">
+          <h2 class="section-title">I primi 3 vincono</h2>
+          <div class="prizes">
+            <article class="prize second">
+              <h3>2</h3>
+              <p>Secondo posto<br />Premio esclusivo</p>
+            </article>
+            <article class="prize first">
+              <h3>1</h3>
+              <p>Primo posto<br />Premio speciale</p>
+            </article>
+            <article class="prize">
+              <h3>3</h3>
+              <p>Terzo posto<br />Premio a sorpresa</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="classifica">
+        <div class="inner">
+          <h2 class="section-title">Classifica live</h2>
+          <div class="leaderboard">
+            <div class="rows">
+              <div class="row"><span class="rank">1</span><strong>Player name</strong><span class="score">12.840</span></div>
+              <div class="row"><span class="rank">2</span><strong>Player name</strong><span class="score">11.520</span></div>
+              <div class="row"><span class="rank">3</span><strong>Player name</strong><span class="score">10.910</span></div>
+            </div>
+            <div>
+              <h3>La top 3 cambia fino alla fine.</h3>
+              <p>Apri la classifica completa per controllare posizione, punti e livelli raggiunti.</p>
+              <div class="actions">
+                <a class="btn primary" href="https://splendid-longma-5b2da5.netlify.app/">Apri classifica live</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="inner">
+          <div class="sponsor-block">
+            <div class="cutowl-panel">
+              <img src="../public/assets/cutowl/logo-cutowl-white.svg" alt="Cutowl" />
+            </div>
+            <div>
+              <h2 class="section-title">Concorso sponsorizzato da Cutowl</h2>
+              <p>Un'esperienza firmata Cutowl per scoprire Due Time giocando.</p>
+              <div class="actions">
+                <a class="btn secondary" href="https://www.cutowl.com/">Scopri Cutowl</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="cta">
+        <div class="inner">
+          <div class="final-cta">
+            <div>
+              <h2 class="section-title">Hai ancora tempo per scalare la classifica</h2>
+              <p>Inquadra il QR, entra nella gara e prova a conquistare il podio.</p>
+              <div class="actions">
+                <a class="btn primary" href="#">Partecipa alla gara</a>
+              </div>
+            </div>
+            <div class="qr">QR</div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="inner">
+          <strong>Due Time Challenge</strong>
+          <span>Concorso sponsorizzato da Cutowl</span>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>

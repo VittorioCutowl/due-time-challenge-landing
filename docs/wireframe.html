@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wireframe - Due Time Challenge</title>
+    <style>
+      :root {
+        --ink: #181717;
+        --muted: #635f5c;
+        --cutowl: #e8433f;
+        --sky: #d9f4ff;
+        --grass: #b9de78;
+        --green: #8fc653;
+        --gold: #f4bd3f;
+        --paper: #fffaf2;
+        --line: rgba(24, 23, 23, 0.14);
+        --shadow: 0 20px 60px rgba(24, 23, 23, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 88vh;
+        padding: 24px clamp(18px, 4vw, 64px) 72px;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.9) 0 9%, transparent 10%),
+          linear-gradient(180deg, #d9f4ff 0%, #eefaff 64%, #cce997 64%, #a7d868 100%);
+      }
+
+      .hero::before,
+      .hero::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: 46px 8px 0 rgba(255, 255, 255, 0.7), 92px -4px 0 rgba(255, 255, 255, 0.6);
+      }
+
+      .hero::before {
+        width: 96px;
+        height: 36px;
+        top: 120px;
+        left: 8%;
+      }
+
+      .hero::after {
+        width: 130px;
+        height: 44px;
+        top: 84px;
+        right: 14%;
+      }
+
+      .header {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        max-width: 1180px;
+        margin: 0 auto 56px;
+      }
+
+      .brand,
+      .sponsor {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 48px;
+      }
+
+      .logo-mark {
+        display: grid;
+        width: 46px;
+        height: 46px;
+        place-items: center;
+        border: 2px solid var(--ink);
+        border-radius: 14px;
+        background: white;
+        font-weight: 900;
+      }
+
+      .brand-text strong,
+      .sponsor strong {
+        display: block;
+        font-size: 15px;
+        line-height: 1.1;
+      }
+
+      .brand-text span,
+      .sponsor span {
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .sponsor {
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 250, 242, 0.72);
+        backdrop-filter: blur(14px);
+      }
+
+      .sponsor-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 99px;
+        background: var(--cutowl);
+      }
+
+      .hero-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(360px, 0.86fr);
+        align-items: center;
+        gap: clamp(32px, 6vw, 84px);
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        padding: 8px 12px;
+        border: 1px solid rgba(232, 67, 63, 0.28);
+        border-radius: 999px;
+        background: rgba(255, 250, 242, 0.75);
+        color: var(--cutowl);
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 99px;
+        background: currentColor;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin: 0;
+        font-size: clamp(52px, 8vw, 104px);
+        line-height: 0.9;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 620px;
+        margin: 24px 0 0;
+        color: #383432;
+        font-size: clamp(19px, 2.1vw, 28px);
+        line-height: 1.25;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 54px;
+        padding: 0 22px;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        font-weight: 900;
+        box-shadow: 4px 4px 0 var(--ink);
+      }
+
+      .btn.primary {
+        background: var(--cutowl);
+        color: white;
+      }
+
+      .btn.secondary {
+        background: white;
+      }
+
+      .hero-visual {
+        position: relative;
+        min-height: 520px;
+      }
+
+      .phone {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: min(64%, 300px);
+        height: 530px;
+        border: 12px solid var(--ink);
+        border-radius: 42px;
+        background: linear-gradient(180deg, #fff 0%, #eefaff 48%, #b9de78 48%, #8fc653 100%);
+        box-shadow: var(--shadow);
+      }
+
+      .phone::before {
+        content: "GAME";
+        position: absolute;
+        top: 24px;
+        left: 24px;
+        color: var(--cutowl);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+      }
+
+      .score-card {
+        position: absolute;
+        right: 110px;
+        bottom: 88px;
+        width: 270px;
+        padding: 22px;
+        border: 2px solid var(--ink);
+        border-radius: 22px;
+        background: white;
+        box-shadow: 8px 8px 0 var(--ink);
+      }
+
+      .score-card span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .score-card strong {
+        display: block;
+        margin-top: 6px;
+        font-size: 42px;
+        line-height: 1;
+      }
+
+      .qr-card {
+        position: absolute;
+        left: 0;
+        top: 70px;
+        width: 230px;
+        padding: 16px;
+        border: 2px solid var(--ink);
+        border-radius: 24px;
+        background: var(--paper);
+        box-shadow: 8px 8px 0 var(--ink);
+      }
+
+      .qr {
+        display: grid;
+        width: 100%;
+        aspect-ratio: 1;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background:
+          linear-gradient(90deg, #111 10px, transparent 10px) 0 0 / 28px 28px,
+          linear-gradient(#111 10px, transparent 10px) 0 0 / 28px 28px,
+          white;
+        color: rgba(255, 255, 255, 0.82);
+        font-weight: 900;
+      }
+
+      .qr-card p {
+        margin: 12px 2px 0;
+        color: #383432;
+        font-size: 14px;
+        line-height: 1.25;
+      }
+
+      .section {
+        padding: 86px clamp(18px, 4vw, 64px);
+      }
+
+      .section-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        margin: 0 0 28px;
+        font-size: clamp(34px, 5vw, 64px);
+        line-height: 0.98;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .step,
+      .leaderboard,
+      .sponsor-block,
+      .final-cta {
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: white;
+        box-shadow: var(--shadow);
+      }
+
+      .step {
+        padding: 28px;
+      }
+
+      .step-num {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 99px;
+        background: var(--cutowl);
+        color: white;
+        font-weight: 900;
+      }
+
+      .step h3 {
+        margin: 28px 0 10px;
+        font-size: 24px;
+      }
+
+      .step p,
+      .prize p,
+      .sponsor-block p,
+      .final-cta p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .prizes-section {
+        background: #181717;
+        color: white;
+      }
+
+      .prizes {
+        display: grid;
+        grid-template-columns: 0.8fr 1fr 0.8fr;
+        align-items: end;
+        gap: 18px;
+        min-height: 390px;
+      }
+
+      .prize {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 250px;
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 28px 28px 0 0;
+        background: #252322;
+      }
+
+      .prize.first {
+        min-height: 340px;
+        background: linear-gradient(180deg, #f4bd3f 0%, #29221a 100%);
+      }
+
+      .prize.second {
+        min-height: 292px;
+      }
+
+      .prize h3 {
+        margin: 0;
+        font-size: 54px;
+      }
+
+      .prize p {
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .leaderboard {
+        display: grid;
+        grid-template-columns: 1fr 0.75fr;
+        gap: 24px;
+        padding: 28px;
+      }
+
+      .rows {
+        display: grid;
+        gap: 12px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 48px 1fr auto;
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+        border-radius: 16px;
+        background: #f5f1e9;
+      }
+
+      .rank {
+        display: grid;
+        width: 36px;
+        height: 36px;
+        place-items: center;
+        border-radius: 99px;
+        background: var(--ink);
+        color: white;
+        font-weight: 900;
+      }
+
+      .score {
+        font-weight: 900;
+      }
+
+      .sponsor-block {
+        display: grid;
+        grid-template-columns: 0.7fr 1fr;
+        gap: 36px;
+        align-items: center;
+        padding: 36px;
+      }
+
+      .cutowl-panel {
+        min-height: 240px;
+        border-radius: 24px;
+        background: var(--ink);
+        color: white;
+        display: grid;
+        place-items: center;
+        font-size: 44px;
+        font-weight: 900;
+      }
+
+      .cutowl-panel span {
+        color: var(--cutowl);
+      }
+
+      .final-cta {
+        display: grid;
+        grid-template-columns: 1fr 220px;
+        gap: 24px;
+        align-items: center;
+        padding: 32px;
+        background: linear-gradient(135deg, #fffaf2 0%, #d9f4ff 100%);
+      }
+
+      .footer {
+        padding: 32px clamp(18px, 4vw, 64px);
+        background: var(--ink);
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 860px) {
+        .hero {
+          min-height: auto;
+          padding-bottom: 42px;
+        }
+
+        .header,
+        .footer-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .sponsor {
+          border-radius: 18px;
+        }
+
+        .hero-grid,
+        .leaderboard,
+        .sponsor-block,
+        .final-cta {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-visual {
+          min-height: 520px;
+        }
+
+        .phone {
+          right: 0;
+          width: 62%;
+        }
+
+        .score-card {
+          right: 22px;
+          bottom: 48px;
+        }
+
+        .qr-card {
+          left: 0;
+          top: 42px;
+          width: 210px;
+        }
+
+        .steps,
+        .prizes {
+          grid-template-columns: 1fr;
+        }
+
+        .prizes {
+          min-height: auto;
+        }
+
+        .prize,
+        .prize.first,
+        .prize.second {
+          min-height: 180px;
+          border-radius: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <header class="header">
+          <a class="brand" href="#">
+            <div class="logo-mark">DT</div>
+            <div class="brand-text">
+              <strong>Due Time</strong>
+              <span>Challenge</span>
+            </div>
+          </a>
+          <a class="sponsor" href="https://www.cutowl.com/">
+            <i class="sponsor-dot"></i>
+            <span>Sponsorizzato da</span>
+            <strong>Cutowl</strong>
+          </a>
+        </header>
+
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Evento live</div>
+            <h1>Scala la classifica Due Time</h1>
+            <p class="subtitle">
+              Gioca a Dui Saves the Flock, fai più punti che puoi e prova a vincere uno dei premi messi in palio da Cutowl.
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="#cta">Partecipa alla gara</a>
+              <a class="btn secondary" href="#classifica">Guarda la classifica</a>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Area visuale wireframe">
+            <div class="phone"></div>
+            <div class="qr-card">
+              <div class="qr">QR</div>
+              <p>Inquadra il QR, scarica Due Time e inizia la sfida.</p>
+            </div>
+            <div class="score-card">
+              <span>Score da battere</span>
+              <strong>12.840</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-inner">
+          <h2 class="section-title">Come funziona</h2>
+          <div class="steps">
+            <article class="step">
+              <div class="step-num">1</div>
+              <h3>Scarica Due Time</h3>
+              <p>Accedi all'app e preparati alla gara.</p>
+            </article>
+            <article class="step">
+              <div class="step-num">2</div>
+              <h3>Gioca e fai punti</h3>
+              <p>Salva il gregge, supera i livelli e migliora il tuo score.</p>
+            </article>
+            <article class="step">
+              <div class="step-num">3</div>
+              <h3>Entra nella top 3</h3>
+              <p>A fine evento, i migliori punteggi vincono i premi.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section prizes-section">
+        <div class="section-inner">
+          <h2 class="section-title">I primi 3 vincono</h2>
+          <div class="prizes">
+            <article class="prize second">
+              <h3>2</h3>
+              <p>Secondo posto<br />Premio esclusivo</p>
+            </article>
+            <article class="prize first">
+              <h3>1</h3>
+              <p>Primo posto<br />Premio speciale</p>
+            </article>
+            <article class="prize">
+              <h3>3</h3>
+              <p>Terzo posto<br />Premio a sorpresa</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="classifica">
+        <div class="section-inner">
+          <h2 class="section-title">Classifica live</h2>
+          <div class="leaderboard">
+            <div class="rows">
+              <div class="row"><span class="rank">1</span><strong>Player name</strong><span class="score">12.840</span></div>
+              <div class="row"><span class="rank">2</span><strong>Player name</strong><span class="score">11.520</span></div>
+              <div class="row"><span class="rank">3</span><strong>Player name</strong><span class="score">10.910</span></div>
+            </div>
+            <div>
+              <h3>La top 3 cambia fino alla fine.</h3>
+              <p>Apri la classifica completa per controllare posizione, punti e livelli raggiunti.</p>
+              <div class="actions">
+                <a class="btn primary" href="https://splendid-longma-5b2da5.netlify.app/">Apri classifica live</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-inner">
+          <div class="sponsor-block">
+            <div class="cutowl-panel">Cut<span>owl</span></div>
+            <div>
+              <h2 class="section-title">Concorso sponsorizzato da Cutowl</h2>
+              <p>Un'esperienza firmata Cutowl per scoprire Due Time giocando.</p>
+              <div class="actions">
+                <a class="btn secondary" href="https://www.cutowl.com/">Scopri Cutowl</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="cta">
+        <div class="section-inner">
+          <div class="final-cta">
+            <div>
+              <h2 class="section-title">Hai ancora tempo per scalare la classifica</h2>
+              <p>Inquadra il QR, entra nella gara e prova a conquistare il podio.</p>
+              <div class="actions">
+                <a class="btn primary" href="#">Partecipa alla gara</a>
+              </div>
+            </div>
+            <div class="qr">QR</div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <strong>Due Time Challenge</strong>
+          <span>Concorso sponsorizzato da Cutowl</span>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>
