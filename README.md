@@ -42,6 +42,14 @@ Preview build:
 npm run preview
 ```
 
+Deploy Cloudflare Pages:
+
+```bash
+npm run deploy
+```
+
+Richiede Wrangler autenticato oppure `CLOUDFLARE_API_TOKEN`.
+
 ## Preview documentali
 
 Con un server statico dalla root del progetto:

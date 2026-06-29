@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name due-time-challenge-landing"
   },
   "dependencies": {
     "astro": "latest"
